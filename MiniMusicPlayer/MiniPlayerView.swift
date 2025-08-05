@@ -8,6 +8,11 @@
 import SwiftUI
 
 struct MiniPlayerView: View {
+    private let album: Album
+
+    init(album: Album) {
+        self.album = album
+    }
 
     var body: some View {
         VStack {
@@ -24,7 +29,7 @@ struct MiniPlayerView: View {
                     Text("Title")
                         .font(.caption)
 
-                    Text("Album")
+                    Text(album.name)
                         .font(.caption2)
                 }
 
@@ -44,5 +49,5 @@ struct MiniPlayerView: View {
 }
 
 #Preview {
-    MiniPlayerView()
+    MiniPlayerView(album: .speakNow)
 }

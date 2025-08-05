@@ -8,12 +8,20 @@
 import SwiftUI
 
 struct LibraryView: View {
+    @Namespace private var namespace
 
     var body: some View {
-        ZStack(alignment: .bottom) {
-            Color.clear
+        NavigationStack {
+            Spacer()
 
-            MiniPlayerView(album: .speakNow)
+            NavigationLink {
+                ContentView(album: .speakNow)
+                    .navigationTransition(.zoom(sourceID: "zoom", in: namespace))
+                    .navigationBarBackButtonHidden()
+            } label: {
+                MiniPlayerView(album: .speakNow)
+                    .matchedGeometryEffect(id: "zoom", in: namespace)
+            }
         }
     }
     

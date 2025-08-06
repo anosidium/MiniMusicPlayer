@@ -53,6 +53,7 @@ struct FullMusicPlayerView: View {
                 Button("Favourite", systemImage: isFavourited ? "heart.fill" : "heart") {
                     isFavourited.toggle()
                 }
+                .contentTransition(.symbolEffect(.replace))
                 .font(.system(size: 24))
                 .labelStyle(.iconOnly)
 
@@ -86,9 +87,18 @@ struct FullMusicPlayerView: View {
 
                 Spacer()
 
-                Button("Play", systemImage: "play.fill", action: {})
-                    .labelStyle(.iconOnly)
-                    .font(.largeTitle)
+                Button {
+                    isPlaying.toggle()
+                } label: {
+                    Image(systemName: isPlaying ? "pause.fill" : "play.fill")
+                        .font(.system(size: 37))
+                        .padding()
+                        .contentTransition(.symbolEffect(.replace))
+                }
+                .buttonBorderShape(.circle)
+                .buttonStyle(.borderedProminent)
+                .tint(.secondary)
+                .frame(width: 75, height: 75)
 
                 Spacer()
 

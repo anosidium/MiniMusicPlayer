@@ -14,6 +14,7 @@ struct FullMusicPlayerView: View {
     @State private var progress: Double = 0.75
     @State private var repeatSong = false
     @State private var isShuffleActive = false
+    @State private var dominantBackgroundColour: Color?
 
     init(album: Album = .speakNow) {
         self.album = album
@@ -134,6 +135,18 @@ struct FullMusicPlayerView: View {
             
         }
         .padding()
+        .background(dominantBackgroundColour)
+        .onAppear {
+            guard let image = UIImage(named: "Speak Now Album") else {
+                return
+            }
+
+            guard let averageColor = image.averageColor else {
+                return
+            }
+
+            dominantBackgroundColour = Color(uiColor: averageColor)
+        }
     }
     
 }

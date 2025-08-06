@@ -31,7 +31,7 @@ struct MiniPlayerView: View {
                     Text(album.tracks[1].title)
                         .font(.system(size: 12, weight: .medium))
 
-                    Text(album.name)
+                    Text(album.artist)
                         .font(.system(size: 10, weight: .regular))
                 }
 

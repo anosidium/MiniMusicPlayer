@@ -12,6 +12,8 @@ struct FullMusicPlayerView: View {
     @State private var isPlaying = false
     @State private var isFavourited = false
     @State private var progress: Double = 0.75
+    @State private var repeatSong = false
+    @State private var isShuffleActive = false
 
     init(album: Album = .speakNow) {
         self.album = album
@@ -26,19 +28,22 @@ struct FullMusicPlayerView: View {
                 Spacer()
 
                 Text("Now Playing")
-                    .bold()
+                    .font(.system(size: 16, weight: .bold))
 
                 Spacer()
 
                 Button("Close", systemImage: "ellipsis.circle", action: {})
                     .labelStyle(.iconOnly)
             }
+            
 
             Image(.speakNowAlbum)
                 .resizable()
                 .scaledToFit()
-                .frame(width: 354, height: 354)
                 .clipShape(.rect(cornerRadius: 12))
+                .shadow(radius: 8)
+//                .frame(width: 354, height: 354)
+
 
             VStack(spacing: 34) {
                 Text(album.tracks[1].title)
@@ -48,6 +53,7 @@ struct FullMusicPlayerView: View {
                 Text(album.artist)
                     .font(.system(size: 16, weight: .medium))
             }
+            
 
             HStack {
                 Button("Favourite", systemImage: isFavourited ? "heart.fill" : "heart") {
@@ -63,21 +69,31 @@ struct FullMusicPlayerView: View {
                     .font(.system(size: 24))
                     .labelStyle(.iconOnly)
             }
+            
 
-            Slider(value: $progress) {
-                Text("Label")
-            } minimumValueLabel: {
-                Text("Min")
-                    .font(.system(size: 10, weight: .medium))
-            } maximumValueLabel: {
-                Text("4:21")
-                    .font(.system(size: 10, weight: .medium))
+            VStack(spacing: 0) {
+                Slider(value: $progress)
+
+                HStack {
+                    Text("2:31")
+
+                    Spacer()
+
+                    Text("4:21")
+
+                }
+                .font(.system(size: 10, weight: .medium))
             }
+            
 
             HStack {
-                Button("Shuffle", systemImage: "shuffle", action: {})
-                    .labelStyle(.iconOnly)
-                    .font(.system(size: 30))
+                Button("Shuffle", systemImage: isShuffleActive ? "shuffle.circle.fill" : "shuffle.circle") {
+                    isShuffleActive.toggle()
+                }
+                .symbolVariant(.none)
+                .contentTransition(.symbolEffect(.replace))
+                .labelStyle(.iconOnly)
+                .font(.system(size: 30))
 
                 Spacer()
 
@@ -108,10 +124,14 @@ struct FullMusicPlayerView: View {
 
                 Spacer()
 
-                Button("Repeat", systemImage: "repeat", action: {})
-                    .labelStyle(.iconOnly)
-                    .font(.system(size: 30))
+                Button("Repeat", systemImage: repeatSong ? "repeat.1" : "repeat") {
+                    repeatSong.toggle()
+                }
+                .contentTransition(.symbolEffect(.replace))
+                .labelStyle(.iconOnly)
+                .font(.system(size: 30))
             }
+            
         }
         .padding()
     }

@@ -19,7 +19,7 @@ struct MiniPlayerView: View {
     var body: some View {
         VStack {
             HStack {
-                Image(.speakNowAlbum)
+                Image(.soyPablo)
                     .resizable()
                     .scaledToFit()
                     .frame(width: 40, height: 40)
@@ -30,10 +30,10 @@ struct MiniPlayerView: View {
                 Spacer()
 
                 VStack(spacing: 5) {
-                    Text(album.tracks[1].title)
+                    Text("Feeling Loney")
                         .font(.system(size: 12, weight: .medium))
 
-                    Text(album.artist)
+                    Text("Soy Pablo")
                         .font(.system(size: 10, weight: .regular))
                 }
 

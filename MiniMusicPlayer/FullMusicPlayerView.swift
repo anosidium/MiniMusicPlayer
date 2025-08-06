@@ -38,20 +38,19 @@ struct FullMusicPlayerView: View {
             }
             
 
-            Image(.speakNowAlbum)
+            Image(.soyPablo)
                 .resizable()
                 .scaledToFit()
                 .clipShape(.rect(cornerRadius: 12))
                 .shadow(radius: 8)
-//                .frame(width: 354, height: 354)
 
 
             VStack(spacing: 34) {
-                Text(album.tracks[1].title)
+                Text("Feeling Lonely")
                     .font(.system(size: 24))
                     .bold()
 
-                Text(album.artist)
+                Text("Soy Pablo")
                     .font(.system(size: 16, weight: .medium))
             }
             
@@ -76,11 +75,11 @@ struct FullMusicPlayerView: View {
                 Slider(value: $progress)
 
                 HStack {
-                    Text("2:31")
+                    Text("2:44")
 
                     Spacer()
 
-                    Text("4:21")
+                    Text("3:17")
 
                 }
                 .font(.system(size: 10, weight: .medium))
@@ -137,7 +136,7 @@ struct FullMusicPlayerView: View {
         .padding()
         .background(dominantBackgroundColour)
         .onAppear {
-            guard let image = UIImage(named: "Speak Now Album") else {
+            guard let image = UIImage(named: "Soy Pablo") else {
                 return
             }
 

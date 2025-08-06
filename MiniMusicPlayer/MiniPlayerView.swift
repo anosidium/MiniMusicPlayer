@@ -9,6 +9,7 @@ import SwiftUI
 
 struct MiniPlayerView: View {
     private let album: Album
+    @State private var isPlaying = false
 
     init(album: Album) {
         self.album = album
@@ -23,27 +24,33 @@ struct MiniPlayerView: View {
                     .frame(width: 40, height: 40)
                     .clipShape(.rect(cornerRadius: 8))
 
+
                 Spacer()
 
-                VStack {
-                    Text("Title")
-                        .font(.caption)
+                VStack(spacing: 5) {
+                    Text(album.tracks[1].title)
+                        .font(.system(size: 12, weight: .medium))
 
                     Text(album.name)
-                        .font(.caption2)
+                        .font(.system(size: 10, weight: .regular))
                 }
 
                 Spacer()
 
-                Button("Play", systemImage: "play", action: {})
-                    .labelStyle(.iconOnly)
-                    .frame(width: 40, height: 40)
+                Button("Play", systemImage: isPlaying ? "pause" : "play") {
+                    isPlaying.toggle()
+                }
+                .labelStyle(.iconOnly)
+                .frame(width: 32, height: 32)
+                .background(in: .circle.stroke(lineWidth: 1))
             }
 
             Slider(value: .constant(0.5))
                 .controlSize(.mini)
         }
-        .padding()
+        .padding(.horizontal)
+        .padding(.vertical, 8)
+        .background(.thickMaterial, in: .rect(cornerRadius: 8))
     }
 
 }

@@ -15,7 +15,7 @@ struct LibraryView: View {
             Spacer()
 
             NavigationLink {
-                ContentView(album: .speakNow)
+                FullMusicPlayerView(album: .speakNow)
                     .navigationTransition(.zoom(sourceID: "zoom", in: namespace))
                     .navigationBarBackButtonHidden()
             } label: {

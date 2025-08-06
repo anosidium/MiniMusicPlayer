@@ -1,5 +1,5 @@
 //
-//  ContentView.swift
+//  FullMusicPlayerView.swift
 //  MiniMusicPlayer
 //
 //  Created by Ammad on 05/08/2025.
@@ -7,8 +7,11 @@
 
 import SwiftUI
 
-struct ContentView: View {
+struct FullMusicPlayerView: View {
     private let album: Album
+    @State private var isPlaying = false
+    @State private var isFavourited = false
+    @State private var progress: Double = 0.75
 
     init(album: Album = .speakNow) {
         self.album = album
@@ -34,40 +37,52 @@ struct ContentView: View {
             Image(.speakNowAlbum)
                 .resizable()
                 .scaledToFit()
+                .frame(width: 354, height: 354)
+                .clipShape(.rect(cornerRadius: 12))
 
-            Text(album.name)
-                .font(.title)
-                .bold()
+            VStack(spacing: 34) {
+                Text(album.tracks[1].title)
+                    .font(.system(size: 24))
+                    .bold()
 
-            Text(album.artist)
+                Text(album.artist)
+                    .font(.system(size: 16, weight: .medium))
+            }
 
             HStack {
-                Button("Favourite", systemImage: "heart", action: {})
-                    .symbolVariant(.fill)
-                    .labelStyle(.iconOnly)
-                
+                Button("Favourite", systemImage: isFavourited ? "heart.fill" : "heart") {
+                    isFavourited.toggle()
+                }
+                .font(.system(size: 24))
+                .labelStyle(.iconOnly)
+
                 Spacer()
                 
                 Button("Skip", systemImage: "square.and.arrow.up", action: {})
+                    .font(.system(size: 24))
                     .labelStyle(.iconOnly)
             }
 
-            Slider(value: .constant(0.75)) {
+            Slider(value: $progress) {
                 Text("Label")
             } minimumValueLabel: {
                 Text("Min")
+                    .font(.system(size: 10, weight: .medium))
             } maximumValueLabel: {
-                Text("Max")
+                Text("4:21")
+                    .font(.system(size: 10, weight: .medium))
             }
 
             HStack {
                 Button("Shuffle", systemImage: "shuffle", action: {})
                     .labelStyle(.iconOnly)
+                    .font(.system(size: 30))
 
                 Spacer()
 
                 Button("Back", systemImage: "backward.end", action: {})
                     .labelStyle(.iconOnly)
+                    .font(.system(size: 30))
 
                 Spacer()
 
@@ -79,11 +94,13 @@ struct ContentView: View {
 
                 Button("Next", systemImage: "forward.end", action: {})
                     .labelStyle(.iconOnly)
+                    .font(.system(size: 30))
 
                 Spacer()
 
                 Button("Repeat", systemImage: "repeat", action: {})
                     .labelStyle(.iconOnly)
+                    .font(.system(size: 30))
             }
         }
         .padding()
@@ -92,5 +109,5 @@ struct ContentView: View {
 }
 
 #Preview {
-    ContentView(album: .speakNow)
+    FullMusicPlayerView(album: .speakNow)
 }

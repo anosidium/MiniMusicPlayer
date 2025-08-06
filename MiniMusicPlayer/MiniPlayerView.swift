@@ -10,6 +10,7 @@ import SwiftUI
 struct MiniPlayerView: View {
     private let album: Album
     @State private var isPlaying = false
+    @State private var progress: Double = 0.5
 
     init(album: Album) {
         self.album = album
@@ -23,6 +24,7 @@ struct MiniPlayerView: View {
                     .scaledToFit()
                     .frame(width: 40, height: 40)
                     .clipShape(.rect(cornerRadius: 8))
+                    .shadow(radius: 8)
 
 
                 Spacer()
@@ -45,12 +47,12 @@ struct MiniPlayerView: View {
                 .background(in: .circle.stroke(lineWidth: 1))
             }
 
-            Slider(value: .constant(0.5))
+            Slider(value: $progress)
                 .controlSize(.mini)
         }
         .padding(.horizontal)
         .padding(.vertical, 8)
-        .background(.thickMaterial, in: .rect(cornerRadius: 8))
+        .background(.ultraThickMaterial, in: .rect(cornerRadius: 8))
     }
 
 }
